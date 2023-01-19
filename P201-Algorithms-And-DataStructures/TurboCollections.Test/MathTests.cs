@@ -46,6 +46,4 @@ public class IteratorTests
         foreach (int num in testList)
             if (num % 2 != 0 || num < 0 || num > maxNumber) Assert.Fail();
     }
-    
-    
 }
