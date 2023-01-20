@@ -48,7 +48,7 @@ public class TurboLinkedStack<T> : IEnumerable<T> {
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     class Enumerator : IEnumerator<T> {
-        Node? CurrentNode;
+        Node? _currentNode;
         readonly Node _firstNode;
 
         public Enumerator(Node firstNode) => _firstNode = firstNode;
@@ -57,14 +57,15 @@ public class TurboLinkedStack<T> : IEnumerable<T> {
         {
             if (_firstNode == null) throw new InvalidOperationException();
             
-            CurrentNode = CurrentNode == null ? _firstNode : CurrentNode.Previous;
-            return CurrentNode != null;
+            _currentNode = _currentNode == null ? _firstNode : _currentNode.Previous;
+            return _currentNode != null;
         }
 
-        public T Current => CurrentNode.Value;
+        public T Current => _currentNode.Value;
+
         object IEnumerator.Current => Current;
 
-        public void Reset() => CurrentNode = null;
+        public void Reset() => _currentNode = null;
 
         public void Dispose() {}
     }
