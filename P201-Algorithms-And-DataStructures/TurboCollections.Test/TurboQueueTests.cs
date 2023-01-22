@@ -110,16 +110,6 @@ public class TurboQueueTests
         var enumerator = tq.GetEnumerator();
         Assert.That(enumerator.MoveNext(), Is.EqualTo(true));
     }
-    
-    // [Test]
-    // public void MoveNextReturnsFalseWhenAtEndOfList()
-    // {
-    //     TurboQueue<object> tq = new TurboQueue<object>();
-    //     tq.Enqueue(12);
-    //     var enumerator = tq.GetEnumerator();
-    //     enumerator.MoveNext();
-    //     Assert.That(enumerator.MoveNext(), Is.EqualTo(false));
-    // }
 
     [Test]
     public void CurrentPointerMovesWithMoveNext()
@@ -149,5 +139,4 @@ public class TurboQueueTests
         enumerator.MoveNext();
         Assert.That(enumerator.Current, Is.EqualTo(12));
     }
-    
 }

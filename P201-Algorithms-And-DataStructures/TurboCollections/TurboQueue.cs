@@ -6,31 +6,38 @@ public class TurboQueue<T> : ITurboQueue<T>
 {
     T[] _array = Array.Empty<T>();
 
-    public int Count => _array.Length;
+    public int Count { get; set; }
 
     public void Enqueue(T item)
     {
-        var newArray = new T[_array.Length + 1];
-        for (var i = 0; i < _array.Length; i++) newArray[i] = _array[i];
-        newArray[^1] = item;
-        _array = newArray;
+        // Resize the array if not big enough
+        if (Count == _array.Length)
+        {
+            var newArray = new T[Math.Max(_array.Length * 2, 1)];
+            for (var i = 0; i < _array.Length; i++) newArray[i] = _array[i];
+            _array = newArray;
+        }
+        _array[Count] = item;
+        Count++;
     }
 
     public T Dequeue()
     {
         T firstValue = _array[0];
-        T[] newArray = new T[_array.Length - 1];
-        for (var i = 1; i < _array.Length; i++)
-            newArray[i - 1] = _array[i];
-        _array = newArray;
+        Count--;
+        for (int i = 0; i < Count; i++) _array[i] = _array[i + 1];
         return firstValue;
     }
 
     public T Peek() => _array[0];
-    public void Clear() => _array = Array.Empty<T>();
+    public void Clear()
+    {
+        _array = Array.Empty<T>();
+        Count = 0;
+    }
 
     public IEnumerator<T> GetEnumerator() =>
-        _array.Length > 0 ? new Enumerator(_array) : throw new InvalidOperationException();
+        Count > 0 ? new Enumerator(_array) : throw new InvalidOperationException();
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     class Enumerator : IEnumerator<T>

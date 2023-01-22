@@ -2,13 +2,6 @@
 
 namespace TurboCollections;
 
-public interface ITurboQueue<T> : IEnumerable<T> {
-    int Count { get; }
-    void Enqueue(T item);
-    T Peek();
-    T Dequeue();
-    void Clear();
-}
 public class TurboLinkedQueue<T> : ITurboQueue<T> {
     class Node {
         public T? Value;
@@ -68,7 +61,6 @@ public class TurboLinkedQueue<T> : ITurboQueue<T> {
     {
         private Node? _currentNode;
         private readonly Node? _firstNode;
-        
         
         public Enumerator(Node firstNode) => _firstNode = firstNode;
 
