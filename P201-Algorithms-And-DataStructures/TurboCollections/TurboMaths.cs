@@ -17,6 +17,20 @@ public static class TurboMaths
 
     public static IEnumerable<int> GetEvenNumbers(int maxNumber)
     {
-        for (int i = 0; i < maxNumber + 1; i += 2) yield return i;
+        for (int i = 0; i < maxNumber + 1; i += 2)
+            yield return i;
     }
+
+    public static float Average(float[] array)
+    {
+        float sum = 0;
+        foreach (float num in array) sum += num;
+        return sum / array.Length;
+    }
+
+    public static void FibonacciRecursive()
+    {
+        
+    }
+    
 }

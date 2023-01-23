@@ -1,12 +1,22 @@
 namespace TurboCollections.Test;
 
-public static class MathsTests
+public class MathsTests
 {
     [Test]
-    public static void SayHelloExists()
+    public void SayHelloExists()
     {
         TurboMaths.SayHello();
         Assert.Pass();
+    }
+
+    [Test]
+    public void AverageReturnsAverageOfArray()
+    {
+        float[] testCase = { 1.5f, 2.1f, 3.0f };
+        Assert.That(TurboMaths.Average(testCase), Is.EqualTo(2.2f));
+        testCase = new float[] { 1, 2, 3, 4, 5 };
+        Assert.That(TurboMaths.Average(testCase), Is.EqualTo(3f));
+        
     }
 }
 
@@ -26,7 +36,6 @@ public class IteratorTests
         foreach (int num in testList)
             if (num % 2 != 0 || num < 0 || num > maxNumber) Assert.Fail();
     }
-    
     
     [Test]
     [TestCase(12)]
