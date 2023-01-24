@@ -28,9 +28,28 @@ public static class TurboMaths
         return sum / array.Length;
     }
 
-    public static void FibonacciRecursive()
+    public static int FibonacciRecursive(int n)
     {
+        if (n == 0) return 0;
+        if (n == 1) return 1;
+        return FibonacciRecursive(n - 1) + FibonacciRecursive(n - 2);
+    }
+    
+    public static int FibonacciIterative(int n)
+    {
+        if (n == 0) return 0;
+        if (n == 1) return 1;
         
+        int previous = 0;
+        int current = 1;
+        int next = 0;
+        for (int i = 0; i < n - 1; i++)
+        {
+            next = current + previous;
+            previous = current;
+            current = next;
+        }
+        return next;
     }
     
 }
