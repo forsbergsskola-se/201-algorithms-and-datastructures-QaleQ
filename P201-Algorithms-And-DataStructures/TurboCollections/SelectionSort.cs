@@ -2,7 +2,7 @@
 
 public static partial class TurboSort
 {
-    public static void SelectionSort(TurboLinkedListMarc<int> list)
+    public static void SelectionSort(TurboLinkedList<int> list)
     {
         for (int i = 0; i < list.Count - 1; i++)
         {

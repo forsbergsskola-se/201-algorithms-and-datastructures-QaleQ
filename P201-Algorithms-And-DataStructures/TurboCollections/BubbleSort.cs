@@ -2,7 +2,7 @@
 
 public static partial class TurboSort
 {
-    public static void BubbleSort(TurboLinkedListMarc<int> list)
+    public static void BubbleSort(TurboLinkedList<int> list)
     {
         int unsorted = list.Count;
         for (int i = 0; i < list.Count; i++)
