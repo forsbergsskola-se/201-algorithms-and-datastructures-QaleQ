@@ -4,38 +4,28 @@ namespace TurboCollections;
 
 public class TurboLinkedQueue<T> : ITurboQueue<T> {
     class Node {
-        public T? Value;
+        public readonly T Value;
         public Node? Next;
+        public Node(T value) => Value = value;
     }
     Node? _firstNode;
     Node? _lastNode;
 
-    public int Count { get; set; }
+    public int Count { get; private set; }
 
     public void Enqueue(T value)
     {
-        if (_firstNode == null)
-        {
-            _firstNode = new Node { Value = value };
-            _lastNode = _firstNode;
-        }
-        else
-        {
-            _lastNode!.Next = new Node { Value = value };
-            _lastNode = _lastNode.Next;
-        }
+        _lastNode = new Node(value);
+        if (_firstNode == null) _firstNode = _lastNode;
+        else _lastNode!.Next = _lastNode;
         Count++;
     }
 
-    public T Peek()
-    {
-        if (_firstNode == null) throw new InvalidOperationException();
-        return _firstNode.Value;
-    }
+    public T Peek() => _firstNode != null ? _firstNode.Value : throw new NullReferenceException();
 
     public T Dequeue()
     {
-        if (_firstNode == null) throw new InvalidOperationException();
+        if (_firstNode == null) throw new NullReferenceException();
         
         Node returnValue = _firstNode;
         _firstNode = _firstNode.Next;
@@ -49,33 +39,26 @@ public class TurboLinkedQueue<T> : ITurboQueue<T> {
         Count--;
     }
 
-    public IEnumerator<T> GetEnumerator()
-    {
-        var enumerator = new Enumerator(_firstNode ?? throw new InvalidOperationException());
-        return enumerator;
-    }
-
+    public IEnumerator<T> GetEnumerator() => new Enumerator(_firstNode);
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     class Enumerator : IEnumerator<T>
     {
-        private Node? _currentNode;
-        private readonly Node? _firstNode;
+        Node? _currentNode;
+        readonly Node? _firstNode;
         
-        public Enumerator(Node firstNode) => _firstNode = firstNode;
+        public Enumerator(Node? firstNode) => _firstNode = firstNode;
 
         public bool MoveNext()
         {
-            if (_firstNode == null) throw new InvalidOperationException();
-            
             _currentNode = _currentNode == null ? _firstNode : _currentNode.Next;
             return _currentNode != null;
         }
 
         public void Reset() => _currentNode = null;
         
-        public T Current => _currentNode.Value;
-        object IEnumerator.Current => Current;
+        public T Current => _currentNode!.Value;
+        object IEnumerator.Current => Current!;
 
         public void Dispose() {}
     }
