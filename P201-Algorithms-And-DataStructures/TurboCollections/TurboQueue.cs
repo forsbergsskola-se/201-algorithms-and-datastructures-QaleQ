@@ -36,8 +36,7 @@ public class TurboQueue<T> : ITurboQueue<T>
         Count = 0;
     }
 
-    public IEnumerator<T> GetEnumerator() =>
-        Count > 0 ? new Enumerator(_array) : throw new InvalidOperationException();
+    public IEnumerator<T> GetEnumerator() => new Enumerator(_array);
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     class Enumerator : IEnumerator<T>

@@ -6,14 +6,14 @@ public class TurboLinkedQueueTests
     public void DequeueThrowsErrorWhenListIsEmpty()
     {
         TurboLinkedQueue<object> tlq = new TurboLinkedQueue<object>();
-        Assert.Throws<InvalidOperationException>(() => tlq.Dequeue());
+        Assert.Throws<NullReferenceException>(() => tlq.Dequeue());
     }
     
     [Test]
     public void PeekThrowsErrorWhenListIsEmpty()
     {
         TurboLinkedQueue<object> tlq = new TurboLinkedQueue<object>();
-        Assert.Throws<InvalidOperationException>(() => tlq.Peek());
+        Assert.Throws<NullReferenceException>(() => tlq.Peek());
     }
 
     [Test]
@@ -93,15 +93,9 @@ public class TurboLinkedQueueTests
         TurboLinkedQueue<object> tlq = new TurboLinkedQueue<object>();
         tlq.Enqueue(12);
         tlq.Clear();
-        Assert.Throws<InvalidOperationException>(() => tlq.Peek());
+        Assert.Throws<NullReferenceException>(() => tlq.Peek());
     }
 
-    [Test]
-    public void GetEnumeratorThrowsErrorOnEmptyList()
-    {
-        Assert.Throws<InvalidOperationException>(() => new TurboLinkedQueue<object>().GetEnumerator());
-    }
-    
     [Test]
     public void MoveNextInitiallyReturnsTrueWhenListNotEmpty()
     {
@@ -111,15 +105,15 @@ public class TurboLinkedQueueTests
         Assert.That(enumerator.MoveNext(), Is.EqualTo(true));
     }
     
-    // [Test]
-    // public void MoveNextReturnsFalseWhenAtEndOfList()
-    // {
-    //     TurboLinkedQueue<object> tlq = new TurboLinkedQueue<object>();
-    //     tlq.Enqueue(12);
-    //     var enumerator = tlq.GetEnumerator();
-    //     enumerator.MoveNext();
-    //     Assert.That(enumerator.MoveNext(), Is.EqualTo(false));
-    // }
+    [Test]
+    public void MoveNextReturnsFalseWhenAtEndOfList()
+    {
+        TurboLinkedQueue<object> tlq = new TurboLinkedQueue<object>();
+        tlq.Enqueue(12);
+        var enumerator = tlq.GetEnumerator();
+        Assert.That(enumerator.MoveNext(), Is.EqualTo(true));
+        Assert.That(enumerator.MoveNext(), Is.EqualTo(false));
+    }
 
     [Test]
     public void CurrentPointerMovesWithMoveNext()

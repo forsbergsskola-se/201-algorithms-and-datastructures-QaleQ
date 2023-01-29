@@ -15,9 +15,10 @@ public class TurboLinkedQueue<T> : ITurboQueue<T> {
 
     public void Enqueue(T value)
     {
-        _lastNode = new Node(value);
-        if (_firstNode == null) _firstNode = _lastNode;
-        else _lastNode!.Next = _lastNode;
+        Node newNode = new Node(value);
+        if (_firstNode == null) _firstNode = newNode;
+        else _lastNode!.Next = newNode;
+        _lastNode = newNode;
         Count++;
     }
 

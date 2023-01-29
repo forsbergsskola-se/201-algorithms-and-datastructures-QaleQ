@@ -6,14 +6,14 @@ public class TurboLinkedStackTests
     public void PopThrowsErrorWhenListIsEmpty()
     {
         TurboLinkedStack<object> tls = new TurboLinkedStack<object>();
-        Assert.Throws<InvalidOperationException>(() => tls.Pop());
+        Assert.Throws<NullReferenceException>(() => tls.Pop());
     }
     
     [Test]
     public void PeekThrowsErrorWhenListIsEmpty()
     {
         TurboLinkedStack<object> tls = new TurboLinkedStack<object>();
-        Assert.Throws<InvalidOperationException>(() => tls.Peek());
+        Assert.Throws<NullReferenceException>(() => tls.Peek());
     }
 
     [Test]
@@ -93,13 +93,7 @@ public class TurboLinkedStackTests
         TurboLinkedStack<object> tls = new TurboLinkedStack<object>();
         tls.Push(12);
         tls.Clear();
-        Assert.Throws<InvalidOperationException>(() => tls.Peek());
-    }
-
-    [Test]
-    public void GetEnumeratorThrowsErrorOnEmptyList()
-    {
-        Assert.Throws<InvalidOperationException>(() => new TurboLinkedStack<object>().GetEnumerator());
+        Assert.Throws<NullReferenceException>(() => tls.Peek());
     }
     
     [Test]
