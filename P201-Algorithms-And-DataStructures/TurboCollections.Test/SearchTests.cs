@@ -34,26 +34,29 @@ public class SearchTests
     [TestCase(99999)]
     public void BinaryVsLinearSearchComparison(int testCase)
     {
-        var numberList = Enumerable.Range(0, 100000);
+        var numberList = Enumerable.Range(0, 10000000);
         var list = new TurboLinkedList<int>();
         list.AddRange(numberList);
         var sw = new Stopwatch();
-        
+
         sw.Start();
-        TurboSearch.BinarySearch(list, testCase);
-        sw.Stop();
-        long binaryResult = sw.ElapsedMilliseconds;
-        Console.WriteLine($"Binary Search value {testCase}: {sw.ElapsedMilliseconds} ms");
-        sw.Restart();
-        TurboSearch.LinearSearch(list, testCase);
+        Assert.That(TurboSearch.LinearSearch(list, testCase), Is.EqualTo(testCase));
         sw.Stop();
         long linearResult = sw.ElapsedMilliseconds;
         Console.WriteLine($"Linear Search value {testCase}: {sw.ElapsedMilliseconds} ms");
         sw.Reset();
 
+        sw.Start();
+        TurboSearch.BinarySearch(list, testCase);
+        sw.Stop();
+        long binaryResult = sw.ElapsedMilliseconds;
+        Console.WriteLine($"Binary Search value {testCase}: {sw.ElapsedMilliseconds} ms");
+        sw.Reset();
+        
         string fasterMethod = (binaryResult < linearResult ? "Binary" : "Linear") + " search";
         long fasterTime = Math.Max(binaryResult, linearResult);
         long slower = Math.Min(binaryResult, linearResult);
         Console.WriteLine($"{fasterMethod} is faster by {fasterTime - slower} ms");
+        numberList = null;
     }
 }
