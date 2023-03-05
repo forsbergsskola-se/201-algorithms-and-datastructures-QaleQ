@@ -22,22 +22,28 @@ public class Game : MonoBehaviour
     
     void Start() => StartGame();
 
-    void StartGame()
+    public void StartGame()
     {
         GameIsActive = true;
+        CurrentScore = 0;
+        BestScore = 0;
         state.playerPosition = startPosition;
         goal.playerPosition = goalPosition;
         goal.SetGrid(state.Grid);
 
-        foreach (var gridCell in state.Grid.cells) if (gridCell.walkable) gridCell.cost = Random.Range(5, 30);
+        foreach (var gridCell in state.Grid.cells) if (gridCell.walkable)
+        {
+            gridCell.cost = Random.Range(5, 30);
+            gridCell.highlighted = false;
+            gridCell.visited = false;
+        }
         
         state.Grid.GetCell(startPosition.x, startPosition.y).cost = 0;
         state.Grid.GetCell(goalPosition.x, goalPosition.y).cost = 0;
 
         Threshold = threshold;
-        State = state;
-
         OptimalScore = Pathfinder.FindHighestPathWithoutExceedingThreshold(state).bestScore;
+        State = state;
     }
 
     public State State

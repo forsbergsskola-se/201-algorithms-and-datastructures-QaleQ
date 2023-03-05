@@ -57,6 +57,6 @@ public class GameView : MonoBehaviour
         Game.GameIsActive = false;
         CurrentScoreView.text = Game.CurrentScore == Game.OptimalScore
             ? "Optimal solution found!"
-            : $"Final score: {Game.BestScore - Game.OptimalScore}";
+            : $"Final score: {Game.BestScore - Game.OptimalScore} ({Game.BestScore})";
     }
 }
