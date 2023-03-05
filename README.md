@@ -19,3 +19,6 @@ This problem seems to force a custom algorithm, since it would both have to acco
 Making the path into a struct allowed storing each individual path's information about the tiles they already 'visited' separate, which breadth first search did not do.  
 
 An application for this sort of problem could be i.e. when packing boxes in a warehouse.
+
+https://user-images.githubusercontent.com/5792742/222988136-dc527f7c-261f-4b7b-ba31-fcd2fbea8cf2.mp4
+
