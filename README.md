@@ -23,9 +23,12 @@ Making the path into a struct allowed storing each individual path's information
 ----
 
 Data structures used:
+
 HashSet - To store all visited node for each individual path.
+
 Queue - To store the next node to be visited (part of BFS)
-Dictionary - To store each finalized path, together with the cost they achieved (Dictionary<int, Path>). This allows me to know that the highest key in the dict is the best path to return.'
+
+Dictionary - To store each finalized path (a path with no more viable neighbor nodes), together with the cost they achieved (Dictionary<int, Path>). This allows me to know that whichever is highest key in the dict is the best path to return.
 
 https://user-images.githubusercontent.com/5792742/222988136-dc527f7c-261f-4b7b-ba31-fcd2fbea8cf2.mp4
 
