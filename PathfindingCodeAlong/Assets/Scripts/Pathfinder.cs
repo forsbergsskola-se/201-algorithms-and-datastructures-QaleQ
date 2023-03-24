@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class Pathfinder
 {
-    public static (IEnumerable<State> states, int bestScore) FindHighestPathWithoutExceedingThreshold(State start)
+    public static (IEnumerable<State> states, int bestScore) FindHighestPathWithoutExceedingThreshold(State start, int threshold)
     {
         Queue<Path> todoPaths = new();
         Dictionary<int, Path> bestPath = new();
@@ -22,11 +22,11 @@ public static class Pathfinder
                 int neighborCellCost = neighborCell.cost;
                 
                 if (currentPath.VisitedStates.Contains(neighbor) || neighborCell.visited ||
-                    neighborCellCost + currentPath.PathCost > Game.Threshold)
+                    neighborCellCost + currentPath.PathCost > threshold)
                     continue;
                 
-                if (neighborCellCost + currentPath.PathCost == Game.Threshold)
-                    return (currentPath.States.Skip(1).Concat(new[] { neighbor }).ToArray(), Game.Threshold);
+                if (neighborCellCost + currentPath.PathCost == threshold)
+                    return (currentPath.States.Skip(1).Concat(new[] { neighbor }).ToArray(), threshold);
 
                 foundNextNeighbor = true;
                 

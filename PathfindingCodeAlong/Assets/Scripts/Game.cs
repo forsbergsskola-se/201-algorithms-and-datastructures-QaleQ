@@ -15,7 +15,6 @@ public class Game : MonoBehaviour
     [SerializeField] int threshold;
     
     public static bool GameIsActive = true;
-    public static int Threshold;
     public static int CurrentScore;
     public static int BestScore;
     public static int OptimalScore;
@@ -41,8 +40,7 @@ public class Game : MonoBehaviour
         state.Grid.GetCell(startPosition.x, startPosition.y).cost = 0;
         state.Grid.GetCell(goalPosition.x, goalPosition.y).cost = 0;
 
-        Threshold = threshold;
-        OptimalScore = Pathfinder.FindHighestPathWithoutExceedingThreshold(state).bestScore;
+        OptimalScore = Pathfinder.FindHighestPathWithoutExceedingThreshold(state, threshold).bestScore;
         State = state;
     }
 
@@ -96,21 +94,21 @@ public class Game : MonoBehaviour
     [ContextMenu("Find Full Path")]
     public void FindPath()
     {
-        var path = Pathfinder.FindHighestPathWithoutExceedingThreshold(state).states;
+        var path = Pathfinder.FindHighestPathWithoutExceedingThreshold(state, threshold).states;
         StartCoroutine(Co_PlayPath(path));
     }
     
     [ContextMenu("Find Next Step")]
     public void FindNextStep()
     {
-        var path = Pathfinder.FindHighestPathWithoutExceedingThreshold(state).states;
+        var path = Pathfinder.FindHighestPathWithoutExceedingThreshold(state, threshold).states;
         if (path != null) State = path.ElementAt(0);
     }
     
     [ContextMenu("Show Best Path")]
     public void ShowBestPath()
     {
-        var path = Pathfinder.FindHighestPathWithoutExceedingThreshold(state).states;
+        var path = Pathfinder.FindHighestPathWithoutExceedingThreshold(state, threshold).states;
         StartCoroutine(Co_ShowPath(path));
     }
 }
