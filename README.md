@@ -4,7 +4,7 @@ A variant of the Knapsack problem (where the goal is to fill a backpack, with th
 
 You can only walk onto adjacent squares, and you cannot walk on a square you have already walked on.
 
-The maximum capacity of the backpack (the threshold) is 60.
+The maximum capacity of the backpack (the threshold) is fixed.
 
 The game finds the optimal path's weight automatically, and you'll be scored by the difference between your highest achieved weight and the optimal path's weight.
 
