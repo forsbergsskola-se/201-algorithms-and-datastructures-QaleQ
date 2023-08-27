@@ -1,5 +1,7 @@
 # KnapsackProblem
 
+Play game: https://play.unity.com/mg/other/pfwgl-lfe
+
 A variant of the Knapsack problem (where the goal is to fill a backpack, with things of different weights, as close as possible to the backpack's maximum capacity), only this would be a grid of squares you walk on, 'picking up' the weights as you walk on them.
 
 You can only walk onto adjacent squares, and you cannot walk on a square you have already walked on.
@@ -27,6 +29,8 @@ HashSet - To store all visited node for each individual path.
 Queue - To store the next node to be visited (part of BFS)
 
 Dictionary - To store each finalized path (a path with no more viable neighbor nodes), together with the cost they achieved (Dictionary<int, Path>). This allows me to know that whichever path has the highest key in the dict is the best path to return.
+
+Play game: https://play.unity.com/mg/other/pfwgl-lfe
 
 https://user-images.githubusercontent.com/5792742/222988136-dc527f7c-261f-4b7b-ba31-fcd2fbea8cf2.mp4
 
